@@ -23,6 +23,12 @@ spec:
     spec:
       containers:
         - name: api
+          env:
+          - name: MONGODB_CONNECTION
+            valueFrom:
+              secretKeyRef:
+                name: cosmosdb
+                key: db
           image: fabmedical893.azurecr.io/content-api
           imagePullPolicy: Always
           livenessProbe:
@@ -42,11 +48,4 @@ spec:
               cpu: 1
               memory: 128Mi
           securityContext:
-            privileged: false
-            terminationMessagePath: /dev/termination-log
-            terminationMessagePolicy: File
-            dnsPolicy: ClusterFirst
-            restartPolicy: Always
-            schedulerName: default-scheduler
-            securityContext: {}
-            terminationGracePeriodSeconds: 30
+            privileged: false 
